@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion '24.0.0-rc4'
+    compileSdkVersion 24
+    buildToolsVersion '24'
 
     defaultConfig {
         applicationId "com.google.samples.mysample"
         minSdkVersion 21
-        targetSdkVersion 22
+        targetSdkVersion 24
         versionCode 1
         versionName "1.0"
         jackOptions {

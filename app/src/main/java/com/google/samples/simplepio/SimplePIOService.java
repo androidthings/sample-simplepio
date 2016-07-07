@@ -9,6 +9,8 @@ import android.view.KeyEvent;
 
 import com.google.samples.simplepio.task.GPIOTask;
 import com.google.samples.simplepio.task.LEDTask;
+import com.google.samples.simplepio.task.PWMTask;
+import com.google.samples.simplepio.task.Task;
 
 /**
  * Simple {@link HomeService} that executes {@link Runnable} in a separate thread.
@@ -26,7 +28,7 @@ public class SimplePIOService extends HomeService {
     private HandlerThread mRunnerThread;
     private Handler mRunnerThreadHandler;
     private int mCurrentTask;
-    private Runnable[] mTasks;
+    private Task[] mTasks;
 
     @Override
     public void onCreate() {
@@ -36,9 +38,10 @@ public class SimplePIOService extends HomeService {
         mRunnerThreadHandler = new Handler(mRunnerThread.getLooper());
 
         mCurrentTask = 0;
-        mTasks = new Runnable[] {
+        mTasks = new Task[] {
                 new GPIOTask(),
-                new LEDTask()
+                new LEDTask(),
+                new PWMTask()
         };
 
         Log.i(TAG, mTasks.length + " tasks available. Current task is " +
@@ -56,14 +59,11 @@ public class SimplePIOService extends HomeService {
         if (((KeyEvent) event).getAction() == KeyEvent.ACTION_DOWN) {
             switch (((KeyEvent) event).getScanCode()) {
                 case BUTTON_EDISON_RM_KEYCODE:
-                    mCurrentTask = (mCurrentTask + 1) % mTasks.length;
-                    Log.d(TAG, "Button RM pressed. Changed current task to " + mCurrentTask +
-                            " (" + getTaskName(mTasks[mCurrentTask]) + "). Now press " +
-                            "PWR to execute it.");
+                    Log.d(TAG, "Button RM pressed.");
+                    skipToNextTask();
                     break;
                 case BUTTON_EDISON_PWR_KEYCODE:
-                    Log.d(TAG, "Button PWR pressed. Executing task " + mCurrentTask +
-                            " (" + getTaskName(mTasks[mCurrentTask]) + ")");
+                    Log.d(TAG, "Button PWR pressed.");
                     executeCurrentTask();
                     break;
             }
@@ -73,17 +73,28 @@ public class SimplePIOService extends HomeService {
     @Override
     public void onDestroy() {
         if (mRunnerThread != null) {
-            mRunnerThread.quit();
+            mRunnerThreadHandler.post(() -> {
+                mTasks[mCurrentTask].releaseResources();
+            });
+            mRunnerThread.quitSafely();
         }
     }
 
-    private void executeCurrentTask() {
-        Log.d(TAG, "Executing task " + mCurrentTask +
-                " (" + getTaskName(mTasks[mCurrentTask]) + ")");
-        Runnable r = mTasks[mCurrentTask];
+    private void skipToNextTask() {
+        final Task previousTask = mTasks[mCurrentTask];
+        mCurrentTask = (mCurrentTask + 1) % mTasks.length;
 
+        // release resources from previous task:
+        mRunnerThreadHandler.post(previousTask::releaseResources);
+
+        Log.d(TAG, "Current task is " + mCurrentTask + ": " + getTaskName(mTasks[mCurrentTask]) +
+                ". Press the PWR button to execute it.");
+    }
+
+    private void executeCurrentTask() {
+        Log.d(TAG, "Executing task " + mCurrentTask + ": " + getTaskName(mTasks[mCurrentTask]));
         // It is a good practice to execute I/O code in a separate thread
-        mRunnerThreadHandler.post(r);
+        mRunnerThreadHandler.post(mTasks[mCurrentTask]);
     }
 
 }

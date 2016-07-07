@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
  * Simple onboard LED handling.
  */
 
-public class LEDTask implements Runnable {
+public class LEDTask extends Task {
     private static final String TAG = SimplePIOService.TAG;
 
     private PeripheralManagerService mService;

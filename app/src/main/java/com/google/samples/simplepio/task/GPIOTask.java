@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
  * Simple GPIO port handling.
  */
 
-public class GPIOTask implements Runnable {
+public class GPIOTask extends Task {
     private static final String TAG = SimplePIOService.TAG;
 
     private PeripheralManagerService mService;
