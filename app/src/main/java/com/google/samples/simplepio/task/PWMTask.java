@@ -5,8 +5,8 @@ import android.pio.PeripheralManagerService;
 import android.system.ErrnoException;
 import android.util.Log;
 
+import com.google.brillo.driver.servo.Servo;
 import com.google.samples.simplepio.SimplePIOService;
-import com.google.samples.simplepio.peripherals.Servo;
 
 import java.util.concurrent.TimeUnit;
 
