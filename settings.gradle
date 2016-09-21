@@ -1,1 +1,1 @@
-include ':blink', ':pwm'
+include ':blink', ':pwm', ':temperature'
