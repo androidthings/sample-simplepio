@@ -1,1 +1,1 @@
-include ':app', ':blink'
+include ':blink'
