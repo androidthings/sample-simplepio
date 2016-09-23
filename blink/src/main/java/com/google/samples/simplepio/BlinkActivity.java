@@ -62,7 +62,8 @@ public class BlinkActivity extends Activity {
     }
 
     @Override
-    protected void onDestroy(){
+    protected void onDestroy() {
+        super.onDestroy();
         // Remove pending blink Runnable from the handler.
         mHandler.removeCallbacks(mBlinkRunnable);
         // Close the Gpio pin.
