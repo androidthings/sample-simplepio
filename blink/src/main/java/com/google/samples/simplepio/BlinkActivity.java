@@ -1,60 +1,43 @@
 package com.google.samples.simplepio;
 
 import android.app.Activity;
+import android.hardware.pio.Gpio;
+import android.hardware.pio.PeripheralManagerService;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.RemoteException;
-import android.hardware.pio.Gpio;
-import android.hardware.pio.PeripheralManagerService;
 import android.system.ErrnoException;
 import android.util.Log;
 
-import java.util.List;
-
 /**
- * BlinkActivity is an example that use the Gpio API to blink an LED at a fixed interval.
+ * Sample usage of the Gpio API that blinks an LED at a fixed interval defined in
+ * {@link #INTERVAL_BETWEEN_BLINKS_MS}.
+ *
+ * Some boards, like Intel Edison, have onboard LEDs linked to specific GPIO pins.
+ * The preferred GPIO pin to use on each board is in the {@link BoardDefaults} class.
+ *
  */
 public class BlinkActivity extends Activity {
     private static final String TAG = "BlinkActivity";
-    /**
-     * GPIO pin the LED is connected on.
-     * For example, on Intel Edison Arduino breakout, pin "IO13" is connected to an onboard LED
-     * that turns on when the GPIO pin is HIGH, and off when low.
-     */
-    private static final String LED_GPIO_PIN = "26";
     private static final int INTERVAL_BETWEEN_BLINKS_MS = 1000;
 
-    private PeripheralManagerService mService;
     private Handler mHandler = new Handler();
     private Runnable mBlinkRunnable = this::blinkLed;
     private Gpio mLedGpio;
-    private boolean mLedState = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.i(TAG, "Starting BlinkActivity");
 
-        mService = new PeripheralManagerService();
+        PeripheralManagerService service = new PeripheralManagerService();
         try {
-            // List available GPIOs:
-            List<String> gpios = mService.getGpioList();
-            if (gpios == null || gpios.isEmpty()) {
-                Log.e(TAG, "No GPIO pins available on this device.");
-                return;
-            }
-            Log.i(TAG, "List of available GPIO pins: " + gpios);
-            if (!gpios.contains(LED_GPIO_PIN)) {
-                Log.e(TAG, "LED GPIO pin not found: " + LED_GPIO_PIN);
-                return;
-            }
-            // Open the LED GPIO pin.
-            Log.i(TAG, "Opening LED GPIO pin: " + LED_GPIO_PIN);
-            mLedGpio = mService.openGpio(LED_GPIO_PIN);
+            String pinName = BoardDefaults.getGPIOForLED();
+            mLedGpio = service.openGpio(pinName);
             mLedGpio.setDirection(Gpio.DIRECTION_OUT_INITIALLY_LOW);
-            mLedState = false;
             Log.i(TAG, "Start blinking LED GPIO pin");
-            // Post a Runnable that conntinously blink the LED GPIO.
+            // Post a Runnable that continuously switch the state of the GPIO, blinking the
+            // corresponding LED
             mHandler.post(mBlinkRunnable);
         } catch (RemoteException | ErrnoException e) {
             Log.e(TAG, "Error on PeripheralIO API", e);
@@ -73,15 +56,16 @@ public class BlinkActivity extends Activity {
     }
 
     private void blinkLed() {
-        // Exit Runnable if the LED GPIO is already closed.
+        // Exit Runnable if the GPIO is already closed
         if (mLedGpio == null) {
             return;
         }
         try {
-            // Toggle the GPIO.
-            mLedState = !mLedState;
-            mLedGpio.setValue(mLedState);
-            // Reschedule the same runnable in {#INTERVAL_BETWEEN_BLINKS_MS} milliseconds.
+            // Toggle the GPIO state
+            mLedGpio.setValue(!mLedGpio.getValue());
+            Log.d(TAG, "State set to " + mLedGpio.getValue());
+
+            // Reschedule the same runnable in {#INTERVAL_BETWEEN_BLINKS_MS} milliseconds
             mHandler.postDelayed(mBlinkRunnable, INTERVAL_BETWEEN_BLINKS_MS);
         } catch (RemoteException | ErrnoException e) {
             Log.e(TAG, "Error on PeripheralIO API", e);
