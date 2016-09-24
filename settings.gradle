@@ -1,1 +1,1 @@
-include ':blink'
+include ':blink', ':pwm'
