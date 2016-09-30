@@ -5,7 +5,6 @@ import android.hardware.pio.PeripheralManagerService;
 import android.hardware.pio.Pwm;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.RemoteException;
 import android.system.ErrnoException;
 import android.util.Log;
 
@@ -53,7 +52,7 @@ public class PWMActivity extends Activity {
             // servo position
             Log.d(TAG, "Start changing PWM pulse");
             mHandler.post(mRunnable);
-        } catch (RemoteException | ErrnoException e) {
+        } catch (ErrnoException e) {
             Log.e(TAG, "Error on PeripheralIO API", e);
         }
     }
@@ -105,7 +104,7 @@ public class PWMActivity extends Activity {
 
             // Reschedule the same runnable in {@link #INTERVAL_BETWEEN_STEPS_MS} milliseconds
             mHandler.postDelayed(mRunnable, INTERVAL_BETWEEN_STEPS_MS);
-        } catch (RemoteException | ErrnoException e) {
+        } catch (ErrnoException e) {
             Log.e(TAG, "Error on PeripheralIO API", e);
         }
     }

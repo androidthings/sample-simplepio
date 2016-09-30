@@ -5,7 +5,6 @@ import android.hardware.pio.Gpio;
 import android.hardware.pio.PeripheralManagerService;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.RemoteException;
 import android.system.ErrnoException;
 import android.util.Log;
 
@@ -39,7 +38,7 @@ public class BlinkActivity extends Activity {
             // Post a Runnable that continuously switch the state of the GPIO, blinking the
             // corresponding LED
             mHandler.post(mBlinkRunnable);
-        } catch (RemoteException | ErrnoException e) {
+        } catch (ErrnoException e) {
             Log.e(TAG, "Error on PeripheralIO API", e);
         }
     }
@@ -67,7 +66,7 @@ public class BlinkActivity extends Activity {
 
             // Reschedule the same runnable in {#INTERVAL_BETWEEN_BLINKS_MS} milliseconds
             mHandler.postDelayed(mBlinkRunnable, INTERVAL_BETWEEN_BLINKS_MS);
-        } catch (RemoteException | ErrnoException e) {
+        } catch (ErrnoException e) {
             Log.e(TAG, "Error on PeripheralIO API", e);
         }
     }
