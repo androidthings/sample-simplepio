@@ -8,8 +8,6 @@ import android.os.Handler;
 import android.system.ErrnoException;
 import android.util.Log;
 
-import java.util.List;
-
 /**
  * TemperatureActivity is an example that use the Peripheral IO
  * to read values from a I2C BMP280 temperature sensor.
