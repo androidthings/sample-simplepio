@@ -87,8 +87,10 @@ public class TemperatureActivity extends Activity {
             // Convert to 20bit integer
             int rawTemp = (msb << 16 | lsb << 8 | xlsb) >> 4;
             // Compensate temperature using calibration data.
-            double tempValue = Bmp280Calibration.compensateTemperature(rawTemp);
-            Log.d(TAG, "temperature: " + tempValue);
+            double tempCelsius = Bmp280Calibration.compensateTemperatureToCelsius(rawTemp);
+            double tempFahrenheit = ((tempCelsius * 9 / 5.0) + 32);
+            Log.d(TAG, String.format("temperature: %.2f Fahrenheit, %.2f Celsius",
+                    tempFahrenheit, tempCelsius));
             mHandler.postDelayed(mSensorRunnable, INTERVAL_BETWEEN_SENSOR_READ_MS);
         } catch (ErrnoException e) {
             Log.e(TAG, "Error reading sensor value", e);

@@ -3,7 +3,7 @@ package com.google.samples.simplepio;
 // Compensation formula from the BMP280 datasheet.
 // https://cdn-shop.adafruit.com/datasheets/BST-BMP280-DS001-11.pdf
 public class Bmp280Calibration {
-    public static double compensateTemperature(int rawTemp) {
+    public static double compensateTemperatureToCelsius(int rawTemp) {
         // Compensate temperature according to calibration data in the datasheet example.
         double adc_T = rawTemp;
         int dig_T1 = 27504;
