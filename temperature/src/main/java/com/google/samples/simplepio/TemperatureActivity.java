@@ -53,7 +53,7 @@ public class TemperatureActivity extends Activity {
             // Temperature resolution: 16bit
             // Pressure resolution: skip
             mSensorDevice.writeRegByte(BMP280_REG_CTRL,
-                    BMP280_POWER_MODE_NORMAL | BMP280_OVERSAMPLING_TEMP_1X);
+                    (byte) (BMP280_POWER_MODE_NORMAL | BMP280_OVERSAMPLING_TEMP_1X));
             Log.d(TAG, "Start reading temperature values from the sensor");
             // Post a Runnable that continously read the sensor value.
             mHandler.post(mSensorRunnable);
@@ -79,11 +79,12 @@ public class TemperatureActivity extends Activity {
         }
         try {
             // Read raw temperature registers.
-            byte[] regBytes = mSensorDevice.readRegBuffer(BMP280_REG_TEMP, 3);
+            byte[] buf = new byte[3];
+            mSensorDevice.readRegBuffer(BMP280_REG_TEMP, buf, 3);
             // msb[7:0] lsb[7:0] xlsb[7:4]
-            int msb = regBytes[0] & 0xff;
-            int lsb = regBytes[1] & 0xff;
-            int xlsb = regBytes[2] & 0xf0;
+            int msb = buf[0] & 0xff;
+            int lsb = buf[1] & 0xff;
+            int xlsb = buf[2] & 0xf0;
             // Convert to 20bit integer
             int rawTemp = (msb << 16 | lsb << 8 | xlsb) >> 4;
             // Compensate temperature using calibration data.
