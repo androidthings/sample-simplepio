@@ -1,1 +1,4 @@
-include ':blink', ':pwm', ':temperature'
+include ':blink'
+include ':pwm'
+include ':temperature'
+include ':button'
