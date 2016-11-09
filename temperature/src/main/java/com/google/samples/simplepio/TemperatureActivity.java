@@ -8,12 +8,14 @@ import android.os.Handler;
 import android.system.ErrnoException;
 import android.util.Log;
 
+import java.io.IOException;
+
 /**
  * TemperatureActivity is an example that use the Peripheral IO
  * to read values from a I2C BMP280 temperature sensor.
  */
 public class TemperatureActivity extends Activity {
-    private static final String TAG = "TemperatureActivity";
+    private static final String TAG = TemperatureActivity.class.getSimpleName();
     /**
      * I2C address of the temperature sensor.
      */
@@ -57,7 +59,7 @@ public class TemperatureActivity extends Activity {
             Log.d(TAG, "Start reading temperature values from the sensor");
             // Post a Runnable that continously read the sensor value.
             mHandler.post(mSensorRunnable);
-        } catch (ErrnoException e) {
+        } catch (IOException e) {
             Log.e(TAG, "Error configuring I2C device", e);
         }
     }
@@ -68,8 +70,13 @@ public class TemperatureActivity extends Activity {
         mHandler.removeCallbacks(mSensorRunnable);
         // Close the I2C device.
         Log.d(TAG, "Closing Sensor device");
-        mSensorDevice.close();
-        mSensorDevice = null;
+        try {
+            mSensorDevice.close();
+        } catch (IOException e) {
+            Log.e(TAG, "Error closing I2C device", e);
+        } finally {
+            mSensorDevice = null;
+        }
     }
 
     private void readSensorValue() {
@@ -93,8 +100,8 @@ public class TemperatureActivity extends Activity {
             Log.d(TAG, String.format("temperature: %.2f Fahrenheit, %.2f Celsius",
                     tempFahrenheit, tempCelsius));
             mHandler.postDelayed(mSensorRunnable, INTERVAL_BETWEEN_SENSOR_READ_MS);
-        } catch (ErrnoException e) {
-            Log.e(TAG, "Error reading sensor value", e);
+        } catch (IOException e) {
+            Log.e(TAG, "Error reading I2C register", e);
         }
     }
 

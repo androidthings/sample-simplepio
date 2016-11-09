@@ -5,8 +5,9 @@ import android.hardware.pio.Gpio;
 import android.hardware.pio.PeripheralManagerService;
 import android.os.Bundle;
 import android.os.Handler;
-import android.system.ErrnoException;
 import android.util.Log;
+
+import java.io.IOException;
 
 /**
  * Sample usage of the Gpio API that blinks an LED at a fixed interval defined in
@@ -17,7 +18,7 @@ import android.util.Log;
  *
  */
 public class BlinkActivity extends Activity {
-    private static final String TAG = "BlinkActivity";
+    private static final String TAG = BlinkActivity.class.getSimpleName();
     private static final int INTERVAL_BETWEEN_BLINKS_MS = 1000;
 
     private Handler mHandler = new Handler();
@@ -38,7 +39,7 @@ public class BlinkActivity extends Activity {
             // Post a Runnable that continuously switch the state of the GPIO, blinking the
             // corresponding LED
             mHandler.post(mBlinkRunnable);
-        } catch (ErrnoException e) {
+        } catch (IOException e) {
             Log.e(TAG, "Error on PeripheralIO API", e);
         }
     }
@@ -50,8 +51,13 @@ public class BlinkActivity extends Activity {
         mHandler.removeCallbacks(mBlinkRunnable);
         // Close the Gpio pin.
         Log.i(TAG, "Closing LED GPIO pin");
-        mLedGpio.close();
-        mLedGpio = null;
+        try {
+            mLedGpio.close();
+        } catch (IOException e) {
+            Log.e(TAG, "Error on PeripheralIO API", e);
+        } finally {
+            mLedGpio = null;
+        }
     }
 
     private void blinkLed() {
@@ -66,7 +72,7 @@ public class BlinkActivity extends Activity {
 
             // Reschedule the same runnable in {#INTERVAL_BETWEEN_BLINKS_MS} milliseconds
             mHandler.postDelayed(mBlinkRunnable, INTERVAL_BETWEEN_BLINKS_MS);
-        } catch (ErrnoException e) {
+        } catch (IOException e) {
             Log.e(TAG, "Error on PeripheralIO API", e);
         }
     }

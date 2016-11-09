@@ -27,6 +27,5 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.google.brillo:iot-sdk:0.6'
+    compile 'com.google.brillo:iot-sdk:0.7'
 }

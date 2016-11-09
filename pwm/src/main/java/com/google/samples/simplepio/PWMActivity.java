@@ -5,8 +5,9 @@ import android.hardware.pio.PeripheralManagerService;
 import android.hardware.pio.Pwm;
 import android.os.Bundle;
 import android.os.Handler;
-import android.system.ErrnoException;
 import android.util.Log;
+
+import java.io.IOException;
 
 /**
  * Sample usage of the PWM API that changes the PWM pulse width at a fixed interval defined in
@@ -14,7 +15,7 @@ import android.util.Log;
  *
  */
 public class PWMActivity extends Activity {
-    private static final String TAG = "PWMActivity";
+    private static final String TAG = PWMActivity.class.getSimpleName();
 
     // Parameters of the servo PWM
     private static final double MIN_ACTIVE_PULSE_DURATION_MS = 1;
@@ -52,7 +53,7 @@ public class PWMActivity extends Activity {
             // servo position
             Log.d(TAG, "Start changing PWM pulse");
             mHandler.post(mRunnable);
-        } catch (ErrnoException e) {
+        } catch (IOException e) {
             Log.e(TAG, "Error on PeripheralIO API", e);
         }
     }
@@ -64,8 +65,13 @@ public class PWMActivity extends Activity {
         mHandler.removeCallbacks(mRunnable);
         // Close the PWM port.
         Log.i(TAG, "Closing port");
-        mPwm.close();
-        mPwm = null;
+        try {
+            mPwm.close();
+        } catch (IOException e) {
+            Log.e(TAG, "Error on PeripheralIO API", e);
+        } finally {
+            mPwm = null;
+        }
     }
 
     private void changePwm() {
@@ -104,7 +110,7 @@ public class PWMActivity extends Activity {
 
             // Reschedule the same runnable in {@link #INTERVAL_BETWEEN_STEPS_MS} milliseconds
             mHandler.postDelayed(mRunnable, INTERVAL_BETWEEN_STEPS_MS);
-        } catch (ErrnoException e) {
+        } catch (IOException e) {
             Log.e(TAG, "Error on PeripheralIO API", e);
         }
     }

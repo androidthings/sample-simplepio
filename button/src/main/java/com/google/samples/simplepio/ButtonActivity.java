@@ -5,15 +5,16 @@ import android.hardware.pio.Gpio;
 import android.hardware.pio.GpioCallback;
 import android.hardware.pio.PeripheralManagerService;
 import android.os.Bundle;
-import android.system.ErrnoException;
 import android.util.Log;
+
+import java.io.IOException;
 
 /**
  * Sample usage of the Gpio API that logs when a button is pressed.
  *
  */
 public class ButtonActivity extends Activity {
-    private static final String TAG = "ButtonActivity";
+    private static final String TAG = ButtonActivity.class.getSimpleName();
 
     private Gpio mButtonGpio;
 
@@ -36,7 +37,7 @@ public class ButtonActivity extends Activity {
                     return true;
                 }
             });
-        } catch (ErrnoException e) {
+        } catch (IOException e) {
             Log.e(TAG, "Error on PeripheralIO API", e);
         }
     }
@@ -47,8 +48,13 @@ public class ButtonActivity extends Activity {
         if (mButtonGpio != null) {
             // Close the Gpio pin
             Log.i(TAG, "Closing Button GPIO pin");
-            mButtonGpio.close();
-            mButtonGpio = null;
+            try {
+                mButtonGpio.close();
+            } catch (IOException e) {
+                Log.e(TAG, "Error on PeripheralIO API", e);
+            } finally {
+                mButtonGpio = null;
+            }
         }
     }
 }
