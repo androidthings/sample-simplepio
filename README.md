@@ -1,33 +1,137 @@
 Simple example of Brillo Peripheral I/O APIs
 ============================================
 
-This Brillo app runs basic code that exercises the PIO APIs. There is a set of API samples that
-can be "browsed" and executed by clicking on onboard buttons.
+This Brillo app runs basic code that exercises the PIO APIs. Each sample is an
+Android module that can be run independently.
+
+**IMPORTANT**: Please, note that these samples are not necessarily the easiest way to accomplish
+a task. In particular, they handle all low level I/O protocols directly, on
+purpose to showcase how to use the Peripheral APIs. In real world applications,
+you should use or develop a suitable driver that encapsulates the manipulation
+of low level APIs.
+
 
 Pre-requisites
 --------------
 
-- Intel Edison
-- Brillo 2.0
+- Android Things compatible board
+- Android Things SDK, currently offered through a private Maven repo. See
+  instructions at [go/brillo-gradle-setup]
+- Android Studio 2.2+
+- Java 8
 
+For the Blink sample:
+- 1 LED
+- 1 resistor
+- 2 jumper wires
+- 1 breadboard
+
+For the Button sample:
+- 1 push button
+- 1 resistor
+- 2 jumper wires
+- 1 breadboard
+
+For the PWM sample:
+- 1 servo
+- 3 wires
+- external power source (recommended, depending on the servo)
+
+For the Temperature sample:
+- 1 Bmp280 sensor like [this](https://www.adafruit.com/products/2651)
+- 4 wires
+- 1 breadboard
 
 Build and install
 =================
 
-1. Plug your Intel Edison board to your computer via USB
-2. Click on "Run" in Android Studio or use the command line: `./gradlew installDebug`
+On Android Studio, select the module in the select box by the "Run" button, and
+then click on the "Run" button.
+
+If you prefer to run on the command line, type
+
+```bash
+./gradlew <module>:installDebug
+adb shell am start com.google.samples.simplepio/.<ModuleActivity>
+```
+
+Sample Specifics
+================
+
+Blink
+-----
+
+```bash
+    ./gradlew blink:installDebug
+    adb shell am start com.google.samples.simplepio/.BlinkActivity
+```
+
+Blinks an LED connected to a GPIO pin.
+
+Find the pin to connect the LED in the [BoardDefaults](blink/src/main/java/com/google/samples/simplepio/BoardDefaults.java)
+class.
 
 
-Run
-===
+Button
+------
 
-Press the "RM" button on the Intel Edison to change from one task to another, and then press the
-"PWR" button to execute the selected task. The selected task will be printed on
-logcat (`adb logcat`).
+```bash
+    ./gradlew button:installDebug
+    adb shell am start com.google.samples.simplepio/.ButtonActivity
+```
+
+Logs to logcat when a button connected to a GPIO pin is pressed. Make sure you
+use a pull-down or pull-up resistor to avoid fluctuation.
+
+Find the pin to connect the button in the [BoardDefaults](button/src/main/java/com/google/samples/simplepio/BoardDefaults.java)
+class.
+
+
+PWM
+---
+
+```bash
+    ./gradlew pwm:installDebug
+    adb shell am start com.google.samples.simplepio/.PWMActivity
+```
+
+Moves a servo from one side to the other on regular steps at a predefined rate.
+
+Find the PWM pins to connect the servo signal wire in the [BoardDefaults](pwm/src/main/java/com/google/samples/simplepio/BoardDefaults.java)
+class.
+
+Servos in general have three wires: Vcc, ground and signal. Connect Vcc to the
+board's Vcc or, ideally, to an external power. Ground should go to the board's
+ground, and signal goes to the PWM pin specified in the BoardDefaults class. The
+most common colors for each wire are red for Vin, gray for ground and orange for
+signal, but confirm with your servo's datasheet to be sure.
+
+
+Temperature
+-----------
+
+```bash
+    ./gradlew temperature:installDebug
+    adb shell am start com.google.samples.simplepio/.TemperatureActivity
+```
+
+Read values from a BMP280 temperature sensor and logs Celsius and Fahrenheit
+values to logcat.
+
+This sample assumes that the BMP280 is connected to an I2C port specified at
+[BoardDefaults](temperature/src/main/java/com/google/samples/simplepio/BoardDefaults.java).
+
+I2C peripherals usually use four or five pins: one or two for Vcc (3.3 or 5v
+from the Vcc pin in the board), ground (from the board), data (SDA) and clock (SCK).
+
+Find the correct pins for each board by looking at the I2C bus used by the
+sample in the BoardDefaults class and then finding in the board's pinout where
+are the SDA/SCK pins for that I2C bus. Some boards have multiple I2C buses,
+others only have one.
 
 
 License
--------
+=======
 
 Copyright 2016 The Android Open Source Project, Inc.
 
