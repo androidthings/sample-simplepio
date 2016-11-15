@@ -17,7 +17,7 @@ public class BoardDefaults {
             case DEVICE_EDISON:
                 return "IO6";
             case DEVICE_RPI3:
-                return "26";
+                return "PWM0";
             case DEVICE_NXP:
                 return "26";
             default:

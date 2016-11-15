@@ -19,7 +19,7 @@ public class BoardDefaults {
             case DEVICE_EDISON:
                 return "IO13";
             case DEVICE_RPI3:
-                return "26";
+                return "BCM26";
             case DEVICE_NXP:
                 return "26";
             default:
