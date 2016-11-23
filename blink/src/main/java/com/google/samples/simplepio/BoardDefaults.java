@@ -14,12 +14,12 @@ public class BoardDefaults {
      * that turns on when the GPIO pin is HIGH, and off when low.
      */
     public static String getGPIOForLED() {
-        // TODO: confirm DEVICE and preferred port for RPI3 and NXP
+        // TODO: confirm preferred port for NXP
         switch (Build.DEVICE) {
             case DEVICE_EDISON:
                 return "IO13";
             case DEVICE_RPI3:
-                return "BCM26";
+                return "BCM6";
             case DEVICE_NXP:
                 return "26";
             default:
