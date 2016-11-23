@@ -1,4 +1,3 @@
 include ':blink'
 include ':pwm'
-include ':temperature'
 include ':button'

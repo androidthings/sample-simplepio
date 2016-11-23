@@ -37,11 +37,6 @@ For the PWM sample:
 - 3 wires
 - external power source (recommended, depending on the servo)
 
-For the Temperature sample:
-- 1 Bmp280 sensor like [this](https://www.adafruit.com/products/2651)
-- 4 wires
-- 1 breadboard
-
 Build and install
 =================
 
@@ -105,29 +100,6 @@ board's Vcc or, ideally, to an external power. Ground should go to the board's
 ground, and signal goes to the PWM pin specified in the BoardDefaults class. The
 most common colors for each wire are red for Vin, gray for ground and orange for
 signal, but confirm with your servo's datasheet to be sure.
-
-
-Temperature
------------
-
-```bash
-    ./gradlew temperature:installDebug
-    adb shell am start com.google.samples.simplepio/.TemperatureActivity
-```
-
-Read values from a BMP280 temperature sensor and logs Celsius and Fahrenheit
-values to logcat.
-
-This sample assumes that the BMP280 is connected to an I2C port specified at
-[BoardDefaults](temperature/src/main/java/com/google/samples/simplepio/BoardDefaults.java).
-
-I2C peripherals usually use four or five pins: one or two for Vcc (3.3 or 5v
-from the Vcc pin in the board), ground (from the board), data (SDA) and clock (SCK).
-
-Find the correct pins for each board by looking at the I2C bus used by the
-sample in the BoardDefaults class and then finding in the board's pinout where
-are the SDA/SCK pins for that I2C bus. Some boards have multiple I2C buses,
-others only have one.
 
 
 License
