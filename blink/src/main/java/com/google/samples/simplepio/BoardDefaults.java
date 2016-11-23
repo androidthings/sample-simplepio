@@ -6,7 +6,7 @@ import android.os.Build;
 public class BoardDefaults {
     private static final String DEVICE_EDISON = "edison";
     private static final String DEVICE_RPI3 = "rpi3";
-    private static final String DEVICE_NXP = "nxp";
+    private static final String DEVICE_NXP = "imx6ul";
 
     /**
      * Return the GPIO pin that the LED is connected on.
