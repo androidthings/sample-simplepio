@@ -34,7 +34,7 @@ For the Button sample:
 
 For the PWM sample:
 - 1 servo
-- 3 wires
+- 3 jumper wires
 - external power source (recommended, depending on the servo)
 
 Build and install
@@ -56,6 +56,9 @@ Sample Specifics
 Blink
 -----
 
+![Schematics for Intel Edison](blink/edison_schematics.png)
+![Schematics for Raspberry Pi 3](blink/rpi3_schematics.png)
+
 ```bash
     ./gradlew blink:installDebug
     adb shell am start com.google.samples.simplepio/.BlinkActivity
@@ -63,12 +66,11 @@ Blink
 
 Blinks an LED connected to a GPIO pin.
 
-Find the pin to connect the LED in the [BoardDefaults](blink/src/main/java/com/google/samples/simplepio/BoardDefaults.java)
-class.
-
-
 Button
 ------
+
+![Schematics for Intel Edison](button/edison_schematics.png)
+![Schematics for Raspberry Pi 3](button/rpi3_schematics.png)
 
 ```bash
     ./gradlew button:installDebug
@@ -78,12 +80,11 @@ Button
 Logs to logcat when a button connected to a GPIO pin is pressed. Make sure you
 use a pull-down or pull-up resistor to avoid fluctuation.
 
-Find the pin to connect the button in the [BoardDefaults](button/src/main/java/com/google/samples/simplepio/BoardDefaults.java)
-class.
-
-
 PWM
 ---
+
+![Schematics for Intel Edison](pwm/edison_schematics.png)
+![Schematics for Raspberry Pi 3](pwm/rpi3_schematics.png)
 
 ```bash
     ./gradlew pwm:installDebug
@@ -91,9 +92,6 @@ PWM
 ```
 
 Moves a servo from one side to the other on regular steps at a predefined rate.
-
-Find the PWM pins to connect the servo signal wire in the [BoardDefaults](pwm/src/main/java/com/google/samples/simplepio/BoardDefaults.java)
-class.
 
 Servos in general have three wires: Vcc, ground and signal. Connect Vcc to the
 board's Vcc or, ideally, to an external power. Ground should go to the board's
