@@ -21,7 +21,7 @@ android {
     buildToolsVersion "24.0.3"
 
     defaultConfig {
-        applicationId "com.google.samples.simplepio"
+        applicationId "com.example.androidthings.simplepio"
         minSdkVersion 24
         targetSdkVersion 24
         versionCode 1

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.google.samples.simplepio;
+package com.example.androidthings.simplepio;
 
 import android.os.Build;
 
@@ -25,17 +25,17 @@ public class BoardDefaults {
     private static final String DEVICE_NXP = "imx6ul";
 
     /**
-     * Return the preferred PWM port for each board.
+     * Return the GPIO pin that the Button is connected on.
      */
-    public static String getPWMPort() {
-        // TODO: confirm DEVICE and preferred port for RPI3 and NXP
+    public static String getGPIOForButton() {
+        // TODO: confirm DEVICE and preferred port for NXP
         switch (Build.DEVICE) {
             case DEVICE_EDISON:
-                return "IO6";
+                return "IO12";
             case DEVICE_RPI3:
-                return "PWM0";
+                return "BCM21";
             case DEVICE_NXP:
-                return "26";
+                return "??";
             default:
                 throw new IllegalStateException("Unknown Build.DEVICE " + Build.DEVICE);
         }

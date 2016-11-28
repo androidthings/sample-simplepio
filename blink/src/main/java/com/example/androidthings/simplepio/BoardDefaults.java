@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.google.samples.simplepio;
+package com.example.androidthings.simplepio;
 
 import android.os.Build;
 

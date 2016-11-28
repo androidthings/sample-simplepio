@@ -1,5 +1,5 @@
 Simple example of Android Things Peripheral I/O APIs
-============================================
+====================================================
 
 This Android Things app runs basic code that exercises the PIO APIs. Each sample is an
 Android module that can be run independently.
@@ -15,8 +15,6 @@ Pre-requisites
 --------------
 
 - Android Things compatible board
-- Android Things SDK, currently offered through a private Maven repo. See
-  instructions at [go/brillo-gradle-setup]
 - Android Studio 2.2+
 - Java 8
 
@@ -47,7 +45,7 @@ If you prefer to run on the command line, type
 
 ```bash
 ./gradlew <module>:installDebug
-adb shell am start com.google.samples.simplepio/.<ModuleActivity>
+adb shell am start com.example.androidthings.simplepio/.<ModuleActivity>
 ```
 
 Sample Specifics
@@ -61,7 +59,7 @@ Blink
 
 ```bash
     ./gradlew blink:installDebug
-    adb shell am start com.google.samples.simplepio/.BlinkActivity
+    adb shell am start com.example.androidthings.simplepio/.BlinkActivity
 ```
 
 Blinks an LED connected to a GPIO pin.
@@ -74,7 +72,7 @@ Button
 
 ```bash
     ./gradlew button:installDebug
-    adb shell am start com.google.samples.simplepio/.ButtonActivity
+    adb shell am start com.example.androidthings.simplepio/.ButtonActivity
 ```
 
 Logs to logcat when a button connected to a GPIO pin is pressed. Make sure you
@@ -88,7 +86,7 @@ PWM
 
 ```bash
     ./gradlew pwm:installDebug
-    adb shell am start com.google.samples.simplepio/.PWMActivity
+    adb shell am start com.example.androidthings.simplepio/.PWMActivity
 ```
 
 Moves a servo from one side to the other on regular steps at a predefined rate.
