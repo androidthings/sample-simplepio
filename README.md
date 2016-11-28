@@ -1,7 +1,7 @@
-Simple example of Brillo Peripheral I/O APIs
+Simple example of Android Things Peripheral I/O APIs
 ============================================
 
-This Brillo app runs basic code that exercises the PIO APIs. Each sample is an
+This Android Things app runs basic code that exercises the PIO APIs. Each sample is an
 Android module that can be run independently.
 
 **IMPORTANT**: Please, note that these samples are not necessarily the easiest way to accomplish
