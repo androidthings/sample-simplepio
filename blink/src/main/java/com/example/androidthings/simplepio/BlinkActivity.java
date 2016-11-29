@@ -17,8 +17,8 @@
 package com.example.androidthings.simplepio;
 
 import android.app.Activity;
-import android.hardware.pio.Gpio;
-import android.hardware.pio.PeripheralManagerService;
+import com.google.androidthings.pio.Gpio;
+import com.google.androidthings.pio.PeripheralManagerService;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -38,7 +38,6 @@ public class BlinkActivity extends Activity {
     private static final int INTERVAL_BETWEEN_BLINKS_MS = 1000;
 
     private Handler mHandler = new Handler();
-    private Runnable mBlinkRunnable = this::blinkLed;
     private Gpio mLedGpio;
 
     @Override
@@ -76,20 +75,23 @@ public class BlinkActivity extends Activity {
         }
     }
 
-    private void blinkLed() {
-        // Exit Runnable if the GPIO is already closed
-        if (mLedGpio == null) {
-            return;
-        }
-        try {
-            // Toggle the GPIO state
-            mLedGpio.setValue(!mLedGpio.getValue());
-            Log.d(TAG, "State set to " + mLedGpio.getValue());
+    private Runnable mBlinkRunnable = new Runnable() {
+        @Override
+        public void run() {
+            // Exit Runnable if the GPIO is already closed
+            if (mLedGpio == null) {
+                return;
+            }
+            try {
+                // Toggle the GPIO state
+                mLedGpio.setValue(!mLedGpio.getValue());
+                Log.d(TAG, "State set to " + mLedGpio.getValue());
 
-            // Reschedule the same runnable in {#INTERVAL_BETWEEN_BLINKS_MS} milliseconds
-            mHandler.postDelayed(mBlinkRunnable, INTERVAL_BETWEEN_BLINKS_MS);
-        } catch (IOException e) {
-            Log.e(TAG, "Error on PeripheralIO API", e);
+                // Reschedule the same runnable in {#INTERVAL_BETWEEN_BLINKS_MS} milliseconds
+                mHandler.postDelayed(mBlinkRunnable, INTERVAL_BETWEEN_BLINKS_MS);
+            } catch (IOException e) {
+                Log.e(TAG, "Error on PeripheralIO API", e);
+            }
         }
-    }
+    };
 }

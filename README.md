@@ -16,7 +16,6 @@ Pre-requisites
 
 - Android Things compatible board
 - Android Studio 2.2+
-- Java 8
 
 For the Blink sample:
 - 1 LED
