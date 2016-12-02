@@ -34,8 +34,7 @@ public class BoardDefaults {
                 return "IO6";
             case DEVICE_RPI3:
                 return "PWM0";
-            case DEVICE_NXP:
-                return "26";
+            // TODO: DEVICE_NXP
             default:
                 throw new IllegalStateException("Unknown Build.DEVICE " + Build.DEVICE);
         }
