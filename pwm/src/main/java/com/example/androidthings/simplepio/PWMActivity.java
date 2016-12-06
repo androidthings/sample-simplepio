@@ -17,8 +17,8 @@
 package com.example.androidthings.simplepio;
 
 import android.app.Activity;
-import com.google.androidthings.pio.PeripheralManagerService;
-import com.google.androidthings.pio.Pwm;
+import com.google.android.things.pio.PeripheralManagerService;
+import com.google.android.things.pio.Pwm;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
