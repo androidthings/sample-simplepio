@@ -28,14 +28,13 @@ public class BoardDefaults {
      * Return the GPIO pin that the Button is connected on.
      */
     public static String getGPIOForButton() {
-        // TODO: confirm DEVICE and preferred port for NXP
         switch (Build.DEVICE) {
             case DEVICE_EDISON:
                 return "IO12";
             case DEVICE_RPI3:
                 return "BCM21";
             case DEVICE_NXP:
-                return "GPIO_25";
+                return "GPIO4_IO20";
             default:
                 throw new IllegalStateException("Unknown Build.DEVICE " + Build.DEVICE);
         }

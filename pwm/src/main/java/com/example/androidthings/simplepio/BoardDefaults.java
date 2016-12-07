@@ -28,13 +28,13 @@ public class BoardDefaults {
      * Return the preferred PWM port for each board.
      */
     public static String getPWMPort() {
-        // TODO: confirm DEVICE and preferred port for RPI3 and NXP
         switch (Build.DEVICE) {
             case DEVICE_EDISON:
                 return "IO6";
             case DEVICE_RPI3:
                 return "PWM0";
-            // TODO: DEVICE_NXP
+            case DEVICE_NXP:
+                return "PWM7";
             default:
                 throw new IllegalStateException("Unknown Build.DEVICE " + Build.DEVICE);
         }
