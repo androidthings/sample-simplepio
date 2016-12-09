@@ -38,7 +38,7 @@ public class BoardDefaults {
             case DEVICE_EDISON_ARDUINO:
                 return "IO6";
             case DEVICE_EDISON:
-                return "PWM0";
+                return "GP12";
             case DEVICE_RPI3:
                 return "PWM0";
             case DEVICE_NXP:
