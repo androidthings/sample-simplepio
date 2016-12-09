@@ -18,16 +18,18 @@ Pre-requisites
 - Android Studio 2.2+
 
 For the Blink sample:
-- 1 LED
-- 1 resistor
-- 2 jumper wires
-- 1 breadboard
+- [Rainbow Hat for Android Things](https://shop.pimoroni.com/products/rainbow-hat-for-android-things) or the following individual components:
+    - 1 LED
+    - 1 resistor
+    - 2 jumper wires
+    - 1 breadboard
 
 For the Button sample:
-- 1 push button
-- 1 resistor
-- 2 jumper wires
-- 1 breadboard
+- [Rainbow Hat for Android Things](https://shop.pimoroni.com/products/rainbow-hat-for-android-things) or the following individual components:
+    - 1 push button
+    - 1 resistor
+    - 2 jumper wires
+    - 1 breadboard
 
 For the PWM sample:
 - 1 servo
@@ -53,6 +55,8 @@ Sample Specifics
 Blink
 -----
 
+If you have the Raspberry Pi [Rainbow Hat for Android Things](https://shop.pimoroni.com/products/rainbow-hat-for-android-things), just plug it onto your Raspberry Pi 3.
+
 ![Schematics for Intel Edison](blink/edison_schematics.png)
 ![Schematics for Raspberry Pi 3](blink/rpi3_schematics.png)
 
@@ -65,6 +69,8 @@ Blinks an LED connected to a GPIO pin.
 
 Button
 ------
+
+If you have the Raspberry Pi [Rainbow Hat for Android Things](https://shop.pimoroni.com/products/rainbow-hat-for-android-things), just plug it onto your Raspberry Pi 3.
 
 ![Schematics for Intel Edison](button/edison_schematics.png)
 ![Schematics for Raspberry Pi 3](button/rpi3_schematics.png)
