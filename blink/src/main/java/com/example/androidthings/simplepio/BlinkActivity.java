@@ -39,6 +39,7 @@ public class BlinkActivity extends Activity {
 
     private Handler mHandler = new Handler();
     private Gpio mLedGpio;
+    private static boolean mLedState = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,8 +85,14 @@ public class BlinkActivity extends Activity {
             }
             try {
                 // Toggle the GPIO state
-                mLedGpio.setValue(!mLedGpio.getValue());
-                Log.d(TAG, "State set to " + mLedGpio.getValue());
+                if (!BoardDefaults.isNxpBoard()) {
+                    mLedGpio.setValue(!mLedGpio.getValue());
+                    Log.d(TAG, "State set to " + mLedGpio.getValue());
+                } else {
+                    mLedGpio.setValue(mLedState);
+                    Log.d(TAG, "State set to " + mLedState);
+                    mLedState = !mLedState;
+                }
 
                 // Reschedule the same runnable in {#INTERVAL_BETWEEN_BLINKS_MS} milliseconds
                 mHandler.postDelayed(mBlinkRunnable, INTERVAL_BETWEEN_BLINKS_MS);
