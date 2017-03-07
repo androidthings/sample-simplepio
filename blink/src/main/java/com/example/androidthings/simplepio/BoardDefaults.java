@@ -50,6 +50,19 @@ public class BoardDefaults {
         }
     }
 
+    /**
+     * NXP's Board can't use the API Gpio.getValue if
+     * the gpio is used for output.
+     */
+    public static boolean isNxpBoard() {
+        switch (getBoardVariant()) {
+            case DEVICE_NXP:
+                return true;
+            default:
+                return false;
+        }
+    }
+
     private static String getBoardVariant() {
         if (!sBoardVariant.isEmpty()) {
             return sBoardVariant;
