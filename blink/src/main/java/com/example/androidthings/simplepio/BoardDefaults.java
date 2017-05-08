@@ -44,7 +44,7 @@ public class BoardDefaults {
             case DEVICE_EDISON:
                 return "GP45";
             case DEVICE_JOULE:
-                return "LED100";
+                return "J6_25";
             case DEVICE_RPI3:
                 return "BCM6";
             case DEVICE_PICO:
