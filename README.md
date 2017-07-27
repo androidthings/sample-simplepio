@@ -1,5 +1,4 @@
-Simple example of Android Things Peripheral I/O APIs
-====================================================
+# Simple example of Android Things Peripheral I/O APIs
 
 This Android Things app runs basic code that exercises the PIO APIs. Each sample is an
 Android module that can be run independently.
@@ -10,9 +9,7 @@ purpose to showcase how to use the Peripheral APIs. In real world applications,
 you should use or develop a suitable driver that encapsulates the manipulation
 of low level APIs.
 
-
-Pre-requisites
---------------
+## Pre-requisites
 
 - Android Things compatible board
 - Android Studio 2.2+
@@ -36,8 +33,7 @@ For the PWM sample:
 - 3 jumper wires
 - external power source (recommended, depending on the servo)
 
-Build and install
-=================
+## Build and install
 
 On Android Studio, select the module in the select box by the "Run" button, and
 then click on the "Run" button.
@@ -49,11 +45,9 @@ If you prefer to run on the command line, type
 adb shell am start com.example.androidthings.simplepio/.<ModuleActivity>
 ```
 
-Sample Specifics
-================
+## Sample Specifics
 
-Blink
------
+### Blink
 
 If you have the Raspberry Pi [Rainbow Hat for Android Things](https://shop.pimoroni.com/products/rainbow-hat-for-android-things), just plug it onto your Raspberry Pi 3.
 
@@ -67,8 +61,7 @@ If you have the Raspberry Pi [Rainbow Hat for Android Things](https://shop.pimor
 
 Blinks an LED connected to a GPIO pin.
 
-Button
-------
+### Button
 
 If you have the Raspberry Pi [Rainbow Hat for Android Things](https://shop.pimoroni.com/products/rainbow-hat-for-android-things), just plug it onto your Raspberry Pi 3.
 
@@ -83,8 +76,7 @@ If you have the Raspberry Pi [Rainbow Hat for Android Things](https://shop.pimor
 Logs to logcat when a button connected to a GPIO pin is pressed. Make sure you
 use a pull-down or pull-up resistor to avoid fluctuation.
 
-PWM
----
+### PWM
 
 ![Schematics for Intel Edison](pwm/edison_schematics.png)
 ![Schematics for Raspberry Pi 3](pwm/rpi3_schematics.png)
@@ -102,9 +94,7 @@ ground, and signal goes to the PWM pin specified in the BoardDefaults class. The
 most common colors for each wire are red for Vin, gray for ground and orange for
 signal, but confirm with your servo's datasheet to be sure.
 
-
-License
-=======
+## License
 
 Copyright 2016 The Android Open Source Project, Inc.
 
