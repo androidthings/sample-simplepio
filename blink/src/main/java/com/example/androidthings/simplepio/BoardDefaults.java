@@ -49,7 +49,7 @@ public class BoardDefaults {
             case DEVICE_RPI3:
                 return "BCM6";
             case DEVICE_IMX6UL_PICO:
-                return "GPIO4_IO20";
+                return "GPIO4_IO22";
             case DEVICE_IMX6UL_VVDN:
                 return "GPIO3_IO06";
             case DEVICE_IMX7D_PICO:
