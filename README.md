@@ -9,6 +9,26 @@ purpose to showcase how to use the Peripheral APIs. In real world applications,
 you should use or develop a suitable driver that encapsulates the manipulation
 of low level APIs.
 
+## Screenshots
+
+### Blink
+
+![Blink sample demo][demo1-gif]
+
+[(Watch the demo on YouTube)][demo1-yt]
+
+### Button
+
+![Button sample demo][demo2-gif]
+
+[(Watch the demo on YouTube)][demo2-yt]
+
+### PWM
+
+![PWM sample demo][demo3-gif]
+
+[(Watch the demo on YouTube)][demo3-yt]
+
 ## Pre-requisites
 
 - Android Things compatible board
@@ -109,3 +129,10 @@ distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
 WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  See the
 License for the specific language governing permissions and limitations under
 the License.
+
+[demo1-yt]: https://www.youtube.com/watch?v=QjX-yfbKAiM&index=4&list=PLWz5rJ2EKKc-GjpNkFe9q3DhE2voJscDT
+[demo1-gif]: demo1.gif
+[demo2-yt]: https://www.youtube.com/watch?v=pgpTpzl7QWY&list=PLWz5rJ2EKKc-GjpNkFe9q3DhE2voJscDT&index=5
+[demo2-gif]: demo2.gif
+[demo3-yt]: https://www.youtube.com/watch?v=H148X62lmrQ&list=PLWz5rJ2EKKc-GjpNkFe9q3DhE2voJscDT&index=6
+[demo3-gif]: demo3.gif
