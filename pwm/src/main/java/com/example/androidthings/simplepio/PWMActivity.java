@@ -17,7 +17,7 @@
 package com.example.androidthings.simplepio;
 
 import android.app.Activity;
-import com.google.android.things.pio.PeripheralManagerService;
+import com.google.android.things.pio.PeripheralManager;
 import com.google.android.things.pio.Pwm;
 import android.os.Bundle;
 import android.os.Handler;
@@ -52,12 +52,11 @@ public class PWMActivity extends Activity {
         super.onCreate(savedInstanceState);
         Log.i(TAG, "Starting PWMActivity");
 
-        PeripheralManagerService service = new PeripheralManagerService();
         try {
             String pinName = BoardDefaults.getPWMPort();
             mActivePulseDuration = MIN_ACTIVE_PULSE_DURATION_MS;
 
-            mPwm = service.openPwm(pinName);
+            mPwm = PeripheralManager.getInstance().openPwm(pinName);
 
             // Always set frequency and initial duty cycle before enabling PWM
             mPwm.setPwmFrequencyHz(1000 / PULSE_PERIOD_MS);

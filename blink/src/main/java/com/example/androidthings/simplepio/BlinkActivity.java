@@ -18,7 +18,7 @@ package com.example.androidthings.simplepio;
 
 import android.app.Activity;
 import com.google.android.things.pio.Gpio;
-import com.google.android.things.pio.PeripheralManagerService;
+import com.google.android.things.pio.PeripheralManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -46,10 +46,9 @@ public class BlinkActivity extends Activity {
         super.onCreate(savedInstanceState);
         Log.i(TAG, "Starting BlinkActivity");
 
-        PeripheralManagerService service = new PeripheralManagerService();
         try {
             String pinName = BoardDefaults.getGPIOForLED();
-            mLedGpio = service.openGpio(pinName);
+            mLedGpio = PeripheralManager.getInstance().openGpio(pinName);
             mLedGpio.setDirection(Gpio.DIRECTION_OUT_INITIALLY_LOW);
             Log.i(TAG, "Start blinking LED GPIO pin");
             // Post a Runnable that continuously switch the state of the GPIO, blinking the

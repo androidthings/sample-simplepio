@@ -19,7 +19,7 @@ package com.example.androidthings.simplepio;
 import android.app.Activity;
 import com.google.android.things.pio.Gpio;
 import com.google.android.things.pio.GpioCallback;
-import com.google.android.things.pio.PeripheralManagerService;
+import com.google.android.things.pio.PeripheralManager;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -39,10 +39,9 @@ public class ButtonActivity extends Activity {
         super.onCreate(savedInstanceState);
         Log.i(TAG, "Starting ButtonActivity");
 
-        PeripheralManagerService service = new PeripheralManagerService();
         try {
             String pinName = BoardDefaults.getGPIOForButton();
-            mButtonGpio = service.openGpio(pinName);
+            mButtonGpio = PeripheralManager.getInstance().openGpio(pinName);
             mButtonGpio.setDirection(Gpio.DIRECTION_IN);
             mButtonGpio.setEdgeTriggerType(Gpio.EDGE_FALLING);
             mButtonGpio.registerGpioCallback(new GpioCallback() {
