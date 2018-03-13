@@ -1,4 +1,4 @@
-# Simple example of Android Things Peripheral I/O APIs
+# Simple example of Android Things Peripheral I/O APIs (Kotlin)
 
 This Android Things app runs basic code that exercises the PIO APIs. Each sample is an
 Android module that can be run independently.
@@ -71,7 +71,7 @@ adb shell am start com.example.androidthings.simplepio/.<ModuleActivity>
 
 If you have the Raspberry Pi [Rainbow Hat for Android Things](https://shop.pimoroni.com/products/rainbow-hat-for-android-things), just plug it onto your Raspberry Pi 3.
 
-![Schematics for Raspberry Pi 3](rpi3_schematics_blink.png)
+![Schematics for Raspberry Pi 3](../rpi3_schematics_blink.png)
 
 ```bash
     ./gradlew blink:installDebug
@@ -84,7 +84,7 @@ Blinks an LED connected to a GPIO pin.
 
 If you have the Raspberry Pi [Rainbow Hat for Android Things](https://shop.pimoroni.com/products/rainbow-hat-for-android-things), just plug it onto your Raspberry Pi 3.
 
-![Schematics for Raspberry Pi 3](rpi3_schematics_button.png)
+![Schematics for Raspberry Pi 3](../rpi3_schematics_button.png)
 
 ```bash
     ./gradlew button:installDebug
@@ -96,7 +96,7 @@ use a pull-down or pull-up resistor to avoid fluctuation.
 
 ### PWM
 
-![Schematics for Raspberry Pi 3](rpi3_schematics_pwm.png)
+![Schematics for Raspberry Pi 3](../rpi3_schematics_pwm.png)
 
 ```bash
     ./gradlew pwm:installDebug
@@ -108,7 +108,7 @@ Moves a servo from one side to the other on regular steps at a predefined rate.
 Servos in general have three wires: Vcc, ground and signal. Connect Vcc to the
 board's Vcc or, ideally, to an external power. Ground should go to the board's
 ground, and signal goes to the PWM pin specified in the BoardDefaults class. The
-most common colors for each wire are red for Vin, gray for ground and orange for
+most common colors for each wire are red for Vin, gray for ground, and orange for
 signal, but confirm with your servo's datasheet to be sure.
 
 ## License
@@ -131,8 +131,8 @@ License for the specific language governing permissions and limitations under
 the License.
 
 [demo1-yt]: https://www.youtube.com/watch?v=QjX-yfbKAiM&index=4&list=PLWz5rJ2EKKc-GjpNkFe9q3DhE2voJscDT
-[demo1-gif]: demo1.gif
+[demo1-gif]: ../demo1.gif
 [demo2-yt]: https://www.youtube.com/watch?v=pgpTpzl7QWY&list=PLWz5rJ2EKKc-GjpNkFe9q3DhE2voJscDT&index=5
-[demo2-gif]: demo2.gif
+[demo2-gif]: ../demo2.gif
 [demo3-yt]: https://www.youtube.com/watch?v=H148X62lmrQ&list=PLWz5rJ2EKKc-GjpNkFe9q3DhE2voJscDT&index=6
-[demo3-gif]: demo3.gif
+[demo3-gif]: ../demo3.gif
