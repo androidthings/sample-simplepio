@@ -18,13 +18,12 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion '26.0.2'
+    compileSdkVersion 27
 
     defaultConfig {
         applicationId "com.example.androidthings.simplepio"
-        minSdkVersion 26
-        targetSdkVersion 25
+        minSdkVersion 27
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
     }
@@ -44,7 +43,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly 'com.google.android.things:androidthings:0.7-devpreview'
+    compileOnly 'com.google.android.things:androidthings:0.8-devpreview'
     implementation 'org.jetbrains.kotlin:kotlin-reflect:1.1.51'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 }
