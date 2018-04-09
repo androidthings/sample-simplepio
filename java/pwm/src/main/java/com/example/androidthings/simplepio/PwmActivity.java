@@ -30,8 +30,8 @@ import java.io.IOException;
  * {@link #INTERVAL_BETWEEN_STEPS_MS}.
  *
  */
-public class PWMActivity extends Activity {
-    private static final String TAG = PWMActivity.class.getSimpleName();
+public class PwmActivity extends Activity {
+    private static final String TAG = PwmActivity.class.getSimpleName();
 
     // Parameters of the servo PWM
     private static final double MIN_ACTIVE_PULSE_DURATION_MS = 1;
@@ -50,7 +50,7 @@ public class PWMActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.i(TAG, "Starting PWMActivity");
+        Log.i(TAG, "Starting PwmActivity");
 
         try {
             String pinName = BoardDefaults.getPWMPort();

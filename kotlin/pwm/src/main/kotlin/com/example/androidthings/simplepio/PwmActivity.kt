@@ -30,7 +30,7 @@ import java.io.IOException
  * [.INTERVAL_BETWEEN_STEPS_MS].
  *
  */
-class PWMActivity : Activity() {
+class PwmActivity : Activity() {
     private val handler = Handler()
     private lateinit var pwm: Pwm
     private var isPulseIncreasing = true
@@ -76,7 +76,7 @@ class PWMActivity : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.i(TAG, "Starting PWMActivity")
+        Log.i(TAG, "Starting PwmActivity")
 
         activePulseDuration = MIN_ACTIVE_PULSE_DURATION_MS
 
@@ -104,7 +104,7 @@ class PWMActivity : Activity() {
     }
 
     companion object {
-        private val TAG = PWMActivity::class.simpleName
+        private val TAG = PwmActivity::class.simpleName
 
         // Parameters of the servo PWM
         const private val MIN_ACTIVE_PULSE_DURATION_MS = 1.0
