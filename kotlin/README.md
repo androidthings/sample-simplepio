@@ -1,7 +1,13 @@
-# Simple example of Android Things Peripheral I/O APIs (Kotlin)
+# Simple Peripheral I/O (Kotlin)
 
-This Android Things app runs basic code that exercises the PIO APIs. Each sample is an
-Android module that can be run independently.
+This Android Things app runs basic code that exercises the Peripheral I/O APIs.
+Each sample is an Android module that can be run independently.
+
+## Introduction
+
+This sample provides an introduction to using the [Peripheral I/O](pio) APIs
+on Android Things. You will learn the basic concepts of opening connections to
+various inputs and outputs for connecting with external peripherals in your app.
 
 **IMPORTANT**: Please, note that these samples are not necessarily the easiest way to accomplish
 a task. In particular, they handle all low level I/O protocols directly, on
@@ -148,6 +154,7 @@ WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  See the
 License for the specific language governing permissions and limitations under
 the License.
 
+[pio]: https://developer.android.com/things/sdk/pio/index.html
 [demo1-yt]: https://www.youtube.com/watch?v=QjX-yfbKAiM&index=4&list=PLWz5rJ2EKKc-GjpNkFe9q3DhE2voJscDT
 [demo1-gif]: ../demo1.gif
 [demo2-yt]: https://www.youtube.com/watch?v=pgpTpzl7QWY&list=PLWz5rJ2EKKc-GjpNkFe9q3DhE2voJscDT&index=5
