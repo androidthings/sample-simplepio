@@ -100,7 +100,7 @@ use a pull-down or pull-up resistor to avoid fluctuation.
 
 ```bash
     ./gradlew pwm:installDebug
-    adb shell am start com.example.androidthings.simplepio/.PWMActivity
+    adb shell am start com.example.androidthings.simplepio/.PwmActivity
 ```
 
 Moves a servo from one side to the other on regular steps at a predefined rate.
