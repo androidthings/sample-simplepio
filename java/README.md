@@ -5,7 +5,7 @@ Each sample is an Android module that can be run independently.
 
 ## Introduction
 
-This sample provides an introduction to using the [Peripheral I/O](pio) APIs
+This sample provides an introduction to using the [Peripheral I/O][pio] APIs
 on Android Things. You will learn the basic concepts of opening connections to
 various inputs and outputs for connecting with external peripherals in your app.
 
