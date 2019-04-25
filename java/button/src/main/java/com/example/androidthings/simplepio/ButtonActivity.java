@@ -22,6 +22,7 @@ import com.google.android.things.pio.GpioCallback;
 import com.google.android.things.pio.PeripheralManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.io.IOException;
 
@@ -39,16 +40,28 @@ public class ButtonActivity extends Activity {
         super.onCreate(savedInstanceState);
         Log.i(TAG, "Starting ButtonActivity");
 
+
+
         try {
+
             String pinName = BoardDefaults.getGPIOForButton();
             mButtonGpio = PeripheralManager.getInstance().openGpio(pinName);
+            // Initialize the pin as an input
             mButtonGpio.setDirection(Gpio.DIRECTION_IN);
-            mButtonGpio.setEdgeTriggerType(Gpio.EDGE_FALLING);
+            // High voltage is considered active
+            mButtonGpio.setActiveType(Gpio.ACTIVE_LOW);
+
+            // Register for all state changes
+            mButtonGpio.setEdgeTriggerType(Gpio.EDGE_RISING);
+
+
             mButtonGpio.registerGpioCallback(new GpioCallback() {
+                int counter=0;
                 @Override
                 public boolean onGpioEdge(Gpio gpio) {
-                    Log.i(TAG, "GPIO changed, button pressed");
                     // Return true to continue listening to events
+                    counter++;
+                    Toast.makeText(ButtonActivity.this, "Button clicked counter :"+counter, Toast.LENGTH_SHORT).show();
                     return true;
                 }
             });
